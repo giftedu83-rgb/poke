@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* 윈드갈: 2×2 스프라이트 시트의 네 비행 프레임을 순서대로 재생한다. */
+.windgal-flight {
+  background-image: url('/images/monsters/windgal-flying-sheet.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  animation: windgal-flight 640ms steps(1, end) infinite;
+  image-rendering: pixelated;
+}
+
+@keyframes windgal-flight {
+  0%, 24.99% { background-position: 0 0; }
+  25%, 49.99% { background-position: 100% 0; }
+  50%, 74.99% { background-position: 0 100%; }
+  75%, 100% { background-position: 100% 100%; }
+}
+
+html, body, #root {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  background-color: #020617;
+}
+
+/* 리플렛 기본 컨트롤 위치가 하단 내비게이션과 겹치지 않도록 조정 */
+.leaflet-bottom.leaflet-right {
+  margin-bottom: 4.5rem;
+}
+.leaflet-control-attribution {
+  font-size: 9px !important;
+}
+
+/* 바텀 시트 등장 애니메이션 */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* 지도 위 접근 가능 마커 강조용 펄스 링 */
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(34, 211, 238, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+}
+.marker-pulse {
+  animation: pulseRing 1.6s ease-out infinite;
+}
+
+/* 발견 화면 몬스터 둥실둥실 움직임 */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-14px) scale(1.03); }
+}
+.animate-floaty {
+  animation: floaty 2.6s ease-in-out infinite;
+}
+
+/* 반짝임 효과 */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+.animate-sparkle {
+  animation: sparkle 1.4s ease-in-out infinite;
+}
+
+/* 수집 성공 시 물방울 상승 애니메이션 */
+@keyframes bubbleUp {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-140px) scale(1); opacity: 0; }
+}
+.animate-bubble {
+  animation: bubbleUp 1.8s ease-in forwards;
+}
